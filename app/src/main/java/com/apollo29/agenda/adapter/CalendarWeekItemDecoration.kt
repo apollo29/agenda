@@ -1,4 +1,4 @@
-package com.apollo29.agenda.view
+package com.apollo29.agenda.adapter
 
 import android.graphics.Canvas
 import android.graphics.Rect
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.apollo29.agenda.R
-import com.apollo29.agenda.adapter.AgendaAdapter
 import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.DateUtils.isFirstDayOfWeek
 import java.time.format.DateTimeFormatter

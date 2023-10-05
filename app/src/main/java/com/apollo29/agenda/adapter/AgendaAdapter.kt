@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apollo29.agenda.R
 import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.DateUtils.isFirstDayOfWeek
+import com.apollo29.agenda.view.EmptyEventViewHolder
+import com.apollo29.agenda.view.HeaderViewHolder
+import com.orhanobut.logger.Logger
 import java.time.LocalDate
 import java.util.Collections
 import kotlin.math.abs
 
-abstract class AgendaAdapter<E : BaseEvent, T : List<E>>() :
+abstract class AgendaAdapter<E : BaseEvent, T : List<E>> :
     PagingDataAdapter<BaseEvent, AgendaAdapter.EventViewHolder<BaseEvent>>(BaseEventComparator()),
     AgendaItemClickListener<BaseEvent> {
 
@@ -21,6 +24,8 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>>() :
             return eventsOn(localDate)
         }
     }
+
+    lateinit var onEventSetListener: OnEventSetListener<BaseEvent>
 
     var showMonth = true
     val dayHeader: StickyHeaderAdapter =
@@ -62,7 +67,7 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>>() :
                 i++
             }
         }
-        //onEventSetListener.onEventSet(events)
+        onEventSetListener.onEventSet(events)
     }
 
     fun event(position: Int): BaseEvent {
@@ -125,10 +130,7 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>>() :
     abstract class EventViewHolder<E : BaseEvent>(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
-        private lateinit var event: E
-
         fun create(event: E, clickListener: AgendaItemClickListener<E>) {
-            this.event = event
             itemView.setOnClickListener { clickListener.onEventClick(event) }
             bind(event)
         }

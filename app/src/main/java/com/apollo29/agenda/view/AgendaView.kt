@@ -6,6 +6,9 @@ import androidx.annotation.RestrictTo
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apollo29.agenda.adapter.AgendaAdapter
+import com.apollo29.agenda.adapter.CalendarWeekItemDecoration
+import com.apollo29.agenda.adapter.OnEventSetListener
+import com.apollo29.agenda.adapter.StickyHeaderDecoration
 import com.apollo29.agenda.model.BaseEvent
 import com.orhanobut.logger.Logger
 import java.time.LocalDate
@@ -13,6 +16,7 @@ import java.time.LocalDate
 class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     RecyclerView(context, attrs, defStyle) {
 
+    private var onInit = true
     private var eventAdapter: AgendaAdapter<BaseEvent, List<BaseEvent>>? = null
     private val linearLayoutManager: LinearLayoutManager
 
@@ -30,10 +34,26 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
         setHasFixedSize(true)
     }
 
+    var onEventSetListener = object : OnEventSetListener<BaseEvent> {
+        override fun onEventSet(events: List<BaseEvent>) {
+            Logger.d("onEventSet $onInit ${eventAdapter!!.itemCount}")
+            onInit()
+        }
+    }
+
+    fun onInit() {
+        if (onInit && eventAdapter!!.itemCount > 0) {
+            Logger.d("onInit true")
+            scrollTo(LocalDate.now())
+            onInit = false
+        }
+    }
+
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     override fun setAdapter(adapter: Adapter<*>?) {
         if (adapter is AgendaAdapter<*, *>) {
             eventAdapter = adapter as AgendaAdapter<BaseEvent, List<BaseEvent>>
+            eventAdapter!!.onEventSetListener = onEventSetListener
             super.setAdapter(eventAdapter)
             addItemDecoration(StickyHeaderDecoration(eventAdapter!!.dayHeader, true))
             addItemDecoration(CalendarWeekItemDecoration())
@@ -71,12 +91,10 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     }
 
     fun scrollTo(localDate: LocalDate?) {
-        Logger.d("SCROLL TO $localDate")
         if (eventAdapter == null) return
         var pos: Int = eventAdapter!!.getAdapterPosition(localDate)
         if (pos >= eventAdapter!!.itemCount) pos = eventAdapter!!.itemCount - 1
         if (pos >= 0) {
-            Logger.d("SCROLL TO POSITION $pos")
             linearLayoutManager.scrollToPositionWithOffset(pos, 0)
         }
     }

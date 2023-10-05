@@ -1,4 +1,4 @@
-package com.apollo29.agenda.adapter
+package com.apollo29.agenda.view
 
 import android.graphics.Color
 import android.view.View

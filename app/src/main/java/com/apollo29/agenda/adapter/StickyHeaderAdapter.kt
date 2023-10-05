@@ -1,6 +1,7 @@
 package com.apollo29.agenda.adapter
 
 import android.view.ViewGroup
+import com.apollo29.agenda.view.HeaderViewHolder
 
 /**
  * The adapter to assist the [StickyHeaderDecoration] in creating and binding the header views.

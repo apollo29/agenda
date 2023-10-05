@@ -1,7 +1,6 @@
 package com.apollo29.agenda.model
 
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 interface BaseEvent : Comparable<BaseEvent> {
 
@@ -36,9 +35,5 @@ interface BaseEvent : Comparable<BaseEvent> {
         override fun hashCode(): Int {
             return 0
         }
-    }
-
-    companion object {
-        val DATE_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy")
     }
 }

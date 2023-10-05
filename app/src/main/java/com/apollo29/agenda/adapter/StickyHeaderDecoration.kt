@@ -1,13 +1,10 @@
-package com.apollo29.agenda.view
+package com.apollo29.agenda.adapter
 
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import androidx.recyclerview.widget.RecyclerView
-import com.apollo29.agenda.adapter.StickyHeaderAdapter
 
 /**
  * A sticky header decoration for android's RecyclerView.

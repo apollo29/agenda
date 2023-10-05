@@ -53,6 +53,7 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
 
     // other
+    implementation("com.kizitonwose.calendar:view:2.4.0")
     implementation("com.orhanobut:logger:2.2.0")
 
     testImplementation("junit:junit:4.13.2")
