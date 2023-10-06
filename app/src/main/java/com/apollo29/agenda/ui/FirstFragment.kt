@@ -53,10 +53,6 @@ class FirstFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 val event = binding.agendaView.firstVisibleEvent()
                 if (event != null && newState != SCROLL_STATE_DRAGGING) {
-                    Logger.d("SCROLL AGENDA")
-                    //binding.calendarView.calendarViewListener?.onMonthScroll(event.date().yearMonth())
-                    //binding.calendarView.scrollToDate(event.date())
-                    // todo set as selected date?!
                     binding.calendarView.notifyDateChanged(event.date())
                 }
             }
@@ -94,6 +90,7 @@ class FirstFragment : Fragment() {
             override fun onMonthScroll(yearMonth: YearMonth?) {
                 yearMonth?.let {
                     binding.agendaView.scrollTo(it.firstDayOfMonth())
+                    binding.calendarView.notifyMonthChanged(it)
                 }
 
             }
