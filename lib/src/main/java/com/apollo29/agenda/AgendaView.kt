@@ -9,7 +9,6 @@ import com.apollo29.agenda.adapter.AgendaAdapter
 import com.apollo29.agenda.adapter.CalendarWeekItemDecoration
 import com.apollo29.agenda.adapter.StickyHeaderDecoration
 import com.apollo29.agenda.model.BaseEvent
-import com.orhanobut.logger.Logger
 import java.time.LocalDate
 
 class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
@@ -36,9 +35,7 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     var onEventSetListener = eventAdapter?.onEventSetListener
 
     fun onInit() {
-        Logger.d("onEventSet $onInit ${eventAdapter!!.itemCount}")
         if (onInit && eventAdapter!!.itemCount > 0) {
-            Logger.d("onInit true")
             scrollToToday()
             onInit = false
         }

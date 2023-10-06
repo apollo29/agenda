@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Agenda -->
+    <attr name="textAppearanceCalendarDay" format="reference" />
+    <attr name="textAppearanceCalendarHeader" format="reference" />
+    <attr name="textAppearanceCalendarCurrentMonth" format="reference" />
+
+    <attr name="textAppearanceAgendaDay" format="reference" />
+    <attr name="textAppearanceAgendaMonth" format="reference" />
+    <attr name="textAppearanceAgendaWeekday" format="reference" />
+</resources>

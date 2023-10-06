@@ -1,4 +1,4 @@
-package com.apollo29.agenda.ui
+package com.apollo29.agenda.sample
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

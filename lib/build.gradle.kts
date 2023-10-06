@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
 }
@@ -9,11 +9,8 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.apollo29.agenda"
         minSdk = 28
         targetSdk = 34
-        versionCode = 1
-        versionName = "$version"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,20 +38,17 @@ android {
 }
 
 dependencies {
-    implementation(project(":lib"))
 
     // androidx
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
     // google
     implementation("com.google.android.material:material:1.10.0")
 
     // other
-    implementation("com.orhanobut:logger:2.2.0")
+    implementation("com.kizitonwose.calendar:view:2.4.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

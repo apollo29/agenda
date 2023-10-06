@@ -22,7 +22,6 @@ import com.kizitonwose.calendar.core.daysOfWeek
 import com.kizitonwose.calendar.view.MonthDayBinder
 import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.kizitonwose.calendar.view.MonthScrollListener
-import com.orhanobut.logger.Logger
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -133,7 +132,6 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
 
         binding.calendarView.monthScrollListener = object : MonthScrollListener {
             override fun invoke(calendarMonth: CalendarMonth) {
-                Logger.d("SCROLL MonthScrollListener")
                 monthView(calendarMonth.yearMonth)
                 calendarViewListener?.onMonthScroll(calendarMonth.yearMonth)
             }

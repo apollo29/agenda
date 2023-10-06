@@ -1,8 +1,6 @@
-package com.apollo29.agenda.ui
+package com.apollo29.agenda.sample
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,7 +9,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.apollo29.agenda.BuildConfig
 import com.apollo29.agenda.R
 import com.apollo29.agenda.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.FormatStrategy
 import com.orhanobut.logger.Logger

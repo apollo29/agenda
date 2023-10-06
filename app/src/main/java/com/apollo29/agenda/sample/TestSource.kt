@@ -1,4 +1,4 @@
-package com.apollo29.agenda.ui
+package com.apollo29.agenda.sample
 
 import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.source.AgendaPagingSource

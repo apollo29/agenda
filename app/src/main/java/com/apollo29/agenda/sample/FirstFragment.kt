@@ -1,4 +1,4 @@
-package com.apollo29.agenda.ui
+package com.apollo29.agenda.sample
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,6 @@ import com.apollo29.agenda.databinding.FragmentFirstBinding
 import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.CalendarUtils.firstDayOfMonth
 import com.apollo29.agenda.util.CalendarUtils.yearMonth
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDate

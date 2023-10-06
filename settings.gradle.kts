@@ -14,5 +14,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "agenda"
-include(":app")
+include(":app",":lib")
  
