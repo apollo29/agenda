@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
 import com.apollo29.agenda.R
 import com.apollo29.agenda.adapter.OnEventSetListener
-import com.apollo29.agenda.calendar.CalendarUtils.month
-import com.apollo29.agenda.calendar.CalendarUtils.name
-import com.apollo29.agenda.calendar.CalendarUtils.yearMonth
+import com.apollo29.agenda.util.CalendarUtils.month
+import com.apollo29.agenda.util.CalendarUtils.name
+import com.apollo29.agenda.util.CalendarUtils.yearMonth
 import com.apollo29.agenda.calendar.DayViewContainer
 import com.apollo29.agenda.calendar.MonthViewContainer
 import com.apollo29.agenda.databinding.FragmentFirstBinding
@@ -70,6 +70,7 @@ class FirstFragment : Fragment() {
                 if (event != null && newState != SCROLL_STATE_DRAGGING) {
                     Logger.d("SCROLL AGENDA")
                     binding.calendarView.scrollToDate(event.date(), DayPosition.MonthDate)
+                    // todo set as selected date?!
                 }
             }
         })

@@ -1,4 +1,4 @@
-package com.apollo29.agenda.calendar
+package com.apollo29.agenda.util
 
 import com.kizitonwose.calendar.core.CalendarMonth
 import java.time.DayOfWeek
