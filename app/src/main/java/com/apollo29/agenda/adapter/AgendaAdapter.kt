@@ -10,7 +10,6 @@ import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.DateUtils.isFirstDayOfWeek
 import com.apollo29.agenda.view.EmptyEventViewHolder
 import com.apollo29.agenda.view.HeaderViewHolder
-import com.orhanobut.logger.Logger
 import java.time.LocalDate
 import java.util.Collections
 import kotlin.math.abs
@@ -25,8 +24,7 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>> :
         }
     }
 
-    lateinit var onEventSetListener: OnEventSetListener<BaseEvent>
-
+    var onEventSetListener: OnEventSetListener<BaseEvent>? = null
     var showMonth = true
     val dayHeader: StickyHeaderAdapter =
         object : StickyHeaderAdapter {
@@ -67,7 +65,7 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>> :
                 i++
             }
         }
-        onEventSetListener.onEventSet(events)
+        onEventSetListener?.onEventSet(events)
     }
 
     fun event(position: Int): BaseEvent {

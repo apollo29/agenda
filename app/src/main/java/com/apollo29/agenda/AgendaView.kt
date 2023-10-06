@@ -1,4 +1,4 @@
-package com.apollo29.agenda.view
+package com.apollo29.agenda
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apollo29.agenda.adapter.AgendaAdapter
 import com.apollo29.agenda.adapter.CalendarWeekItemDecoration
-import com.apollo29.agenda.adapter.OnEventSetListener
 import com.apollo29.agenda.adapter.StickyHeaderDecoration
 import com.apollo29.agenda.model.BaseEvent
 import com.orhanobut.logger.Logger
@@ -34,17 +33,13 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
         setHasFixedSize(true)
     }
 
-    var onEventSetListener = object : OnEventSetListener<BaseEvent> {
-        override fun onEventSet(events: List<BaseEvent>) {
-            Logger.d("onEventSet $onInit ${eventAdapter!!.itemCount}")
-            onInit()
-        }
-    }
+    var onEventSetListener = eventAdapter?.onEventSetListener
 
     fun onInit() {
+        Logger.d("onEventSet $onInit ${eventAdapter!!.itemCount}")
         if (onInit && eventAdapter!!.itemCount > 0) {
             Logger.d("onInit true")
-            scrollTo(LocalDate.now())
+            scrollToToday()
             onInit = false
         }
     }
@@ -53,7 +48,6 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     override fun setAdapter(adapter: Adapter<*>?) {
         if (adapter is AgendaAdapter<*, *>) {
             eventAdapter = adapter as AgendaAdapter<BaseEvent, List<BaseEvent>>
-            eventAdapter!!.onEventSetListener = onEventSetListener
             super.setAdapter(eventAdapter)
             addItemDecoration(StickyHeaderDecoration(eventAdapter!!.dayHeader, true))
             addItemDecoration(CalendarWeekItemDecoration())
@@ -88,6 +82,10 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     fun firstVisibleEvent(): BaseEvent? {
         val pos = linearLayoutManager.findFirstVisibleItemPosition()
         return if (pos == NO_POSITION) null else eventAdapter?.event(pos)
+    }
+
+    fun scrollToToday() {
+        scrollTo(LocalDate.now())
     }
 
     fun scrollTo(localDate: LocalDate?) {

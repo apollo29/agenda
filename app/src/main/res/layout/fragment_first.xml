@@ -6,36 +6,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:animateLayoutChanges="true"
         android:padding="16dp"
         tools:context=".ui.FirstFragment">
 
-        <CheckedTextView
-            android:id="@+id/monthView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:checked="false"
-            android:clickable="true"
-            android:drawableEnd="@drawable/calendar_arrow_drop"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:textAppearance="?attr/textAppearanceCalendarCurrentMonth"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Februar" />
-
-        <com.kizitonwose.calendar.view.CalendarView
+        <com.apollo29.agenda.CalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:cv_daySize="seventhWidth"
-            app:cv_dayViewResource="@layout/calendar_day_layout"
-            app:cv_monthHeaderResource="@layout/calendar_day_titles_container"
-            app:layout_constraintTop_toBottomOf="@id/monthView" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.apollo29.agenda.view.AgendaView
+        <com.apollo29.agenda.AgendaView
             android:id="@+id/agenda_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"

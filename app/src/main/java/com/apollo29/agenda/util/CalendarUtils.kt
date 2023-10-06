@@ -1,5 +1,6 @@
 package com.apollo29.agenda.util
 
+import com.apollo29.agenda.util.CalendarUtils.firstDayOfMonth
 import com.kizitonwose.calendar.core.CalendarMonth
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -25,11 +26,15 @@ object CalendarUtils {
     }
 
     fun CalendarMonth.monthYear(textStyle: TextStyle = TextStyle.FULL): String {
-        return this.monthYear(textStyle)
+        return this.yearMonth.monthYear(textStyle)
     }
 
     fun CalendarMonth.firstDayOfMonth(): LocalDate {
         return this.weekDays.first().first().date
+    }
+
+    fun YearMonth.firstDayOfMonth(): LocalDate {
+        return this.atDay(1)
     }
 
     fun YearMonth.month(textStyle: TextStyle = TextStyle.FULL): String {

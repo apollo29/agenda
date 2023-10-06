@@ -4,7 +4,6 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.DateProgression
-import com.orhanobut.logger.Logger
 import java.io.IOException
 import java.time.LocalDate
 
@@ -27,16 +26,12 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
     }
 
     override suspend fun load(params: LoadParams<LocalDate>): LoadResult<LocalDate, BaseEvent> {
-        Logger.d("INIT ${params.key}")
-
         val initialDate = params.key ?: LocalDate.now()
         val startDate = initialDate.minusDays(30)
         val endDate = initialDate.plusDays(30)
 
         val response = loadData(startDate, endDate)
         val list = fetchData(startDate, endDate, response)
-
-        Logger.d("Page ${params.key} - ${params.loadSize} / InitialDate $initialDate / StartDate $startDate / EndDate $endDate")
 
         return try {
             LoadResult.Page(
@@ -54,9 +49,6 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
         endDate: LocalDate,
         data: List<BaseEvent>
     ): List<BaseEvent> {
-        Logger.d("FETCH DATA")
-        Logger.d(data)
-
         val list = mutableListOf<BaseEvent>()
         for (date in startDate..endDate step 1) {
             list.add(BaseEvent.Empty(date))
