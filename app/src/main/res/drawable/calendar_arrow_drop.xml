@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="false">
+        <layer-list>
+            <item android:drawable="@drawable/calendar_arrow_drop_down" android:gravity="center" />
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list>
+            <item android:drawable="@drawable/calendar_arrow_drop_up" android:gravity="center" />
+        </layer-list>
+    </item>
+</selector>

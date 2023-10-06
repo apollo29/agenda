@@ -21,13 +21,26 @@ object CalendarUtils {
     }
 
     fun CalendarMonth.month(textStyle: TextStyle = TextStyle.FULL): String {
-        return this.yearMonth.month.getDisplayName(
+        return this.yearMonth.month(textStyle)
+    }
+
+    fun CalendarMonth.monthYear(textStyle: TextStyle = TextStyle.FULL): String {
+        return this.monthYear(textStyle)
+    }
+
+    fun CalendarMonth.firstDayOfMonth(): LocalDate {
+        return this.weekDays.first().first().date
+    }
+
+    fun YearMonth.month(textStyle: TextStyle = TextStyle.FULL): String {
+        return this.month.getDisplayName(
             textStyle,
             Locale.getDefault()
         )
     }
 
-    fun CalendarMonth.firstDayOfMonth(): LocalDate {
-        return this.weekDays.first().first().date
+    fun YearMonth.monthYear(textStyle: TextStyle = TextStyle.FULL): String {
+        val month = this.month(textStyle)
+        return "$month ${this.year}"
     }
 }

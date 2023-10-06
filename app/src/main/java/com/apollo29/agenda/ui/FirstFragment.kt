@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.children
@@ -13,15 +15,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
+import androidx.recyclerview.widget.RecyclerView.VISIBLE
 import com.apollo29.agenda.R
 import com.apollo29.agenda.adapter.OnEventSetListener
-import com.apollo29.agenda.util.CalendarUtils.month
 import com.apollo29.agenda.util.CalendarUtils.name
 import com.apollo29.agenda.util.CalendarUtils.yearMonth
 import com.apollo29.agenda.calendar.DayViewContainer
 import com.apollo29.agenda.calendar.MonthViewContainer
 import com.apollo29.agenda.databinding.FragmentFirstBinding
 import com.apollo29.agenda.model.BaseEvent
+import com.apollo29.agenda.util.CalendarUtils.monthYear
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -61,6 +64,19 @@ class FirstFragment : Fragment() {
 
         // TEST
 
+        // Month
+        // todo sync today with cal and agenda
+        binding.monthView.text = YearMonth.now().monthYear()
+        binding.monthView.setOnClickListener {
+            binding.monthView.isChecked = !binding.monthView.isChecked
+            if (binding.monthView.isChecked) {
+                binding.calendarView.visibility = VISIBLE
+            }
+            else {
+                binding.calendarView.visibility = GONE
+            }
+        }
+
         // Agenda
         val adapter = TestAdapter()
         binding.agendaView.setAdapter(adapter)
@@ -93,15 +109,19 @@ class FirstFragment : Fragment() {
                 if (data.date == selectedDate) {
                     // If this is the selected date, show a round background and change the text color.
                     container.textView.setTextColor(Color.WHITE)
-                    container.textView.setBackgroundResource(R.drawable.selected_day)
+                    container.textView.setBackgroundResource(R.drawable.calendar_selected_day)
                 } else if (data.date == LocalDate.now()) {
                     // If this is the current date, show a circle.
                     container.textView.setTextColor(Color.BLACK)
-                    container.textView.setBackgroundResource(R.drawable.current_day)
+                    container.textView.setBackgroundResource(R.drawable.calendar_current_day)
                 } else {
                     // If this is NOT the selected date, remove the background and reset the text color.
                     container.textView.setTextColor(Color.BLACK)
                     container.textView.background = null
+                }
+
+                if (data.position != DayPosition.MonthDate) {
+                    container.textView.setTextColor(Color.GRAY)
                 }
 
                 container.view.setOnClickListener {
@@ -160,7 +180,7 @@ class FirstFragment : Fragment() {
         binding.calendarView.monthScrollListener = object : MonthScrollListener {
             override fun invoke(calendarMonth: CalendarMonth) {
                 Logger.d("SCROLL MonthScrollListener")
-                binding.monthView.text = calendarMonth.month()
+                binding.monthView.text = calendarMonth.monthYear()
             }
         }
 

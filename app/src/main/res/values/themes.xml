@@ -8,13 +8,17 @@
         <item name="textAppearanceAgendaDay">@style/Base.Theme.Agenda.Day</item>
         <item name="textAppearanceAgendaMonth">@style/Base.Theme.Agenda.Month</item>
         <item name="textAppearanceAgendaWeekday">@style/Base.Theme.Agenda.Weekday</item>
+
+        <!-- Calendar -->
+        <item name="textAppearanceCalendarDay">@style/Base.Theme.Calendar.Day</item>
+        <item name="textAppearanceCalendarHeader">@style/Base.Theme.Calendar.Header</item>
+        <item name="textAppearanceCalendarCurrentMonth">@style/Base.Theme.Calendar.Month</item>
     </style>
 
     <style name="Theme.Agenda" parent="Base.Theme.Agenda" />
 
     <!--
     // Agenda
-    // Calendar Day
     -->
     <style name="Base.Theme.Agenda.Day" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:textFontWeight">500</item>
@@ -27,5 +31,20 @@
     <style name="Base.Theme.Agenda.Weekday" parent="TextAppearance.Material3.BodySmall">
         <item name="android:textFontWeight">500</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!--
+    // Calendar
+    -->
+    <style name="Base.Theme.Calendar.Day" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textFontWeight">500</item>
+    </style>
+
+    <style name="Base.Theme.Calendar.Header" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textFontWeight">700</item>
+    </style>
+
+    <style name="Base.Theme.Calendar.Month" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textFontWeight">500</item>
     </style>
 </resources>

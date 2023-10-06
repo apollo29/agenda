@@ -28,7 +28,7 @@
         style="?attr/textAppearanceAgendaDay"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/current_day"
+        android:background="@drawable/calendar_current_day"
         android:gravity="center"
         tools:text="24" />
 </LinearLayout>

@@ -19,7 +19,7 @@ class HeaderViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     var dayTextColor: Int = Color.BLACK
     var currentDayTextColor: Int = Color.BLACK
-    var currentDayBackground: Int = R.drawable.current_day
+    var currentDayBackground: Int = R.drawable.calendar_current_day
 
     fun bind(event: BaseEvent, showMonth: Boolean) {
         val day = view.findViewById<TextView>(R.id.day)
