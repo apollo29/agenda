@@ -20,8 +20,8 @@ object CalendarUtils {
         )
     }
 
-    fun CalendarMonth.month(textStyle: TextStyle = TextStyle.FULL): String {
-        return this.yearMonth.month(textStyle)
+    fun CalendarMonth.monthName(textStyle: TextStyle = TextStyle.FULL): String {
+        return this.yearMonth.monthName(textStyle)
     }
 
     fun CalendarMonth.monthYear(textStyle: TextStyle = TextStyle.FULL): String {
@@ -36,7 +36,7 @@ object CalendarUtils {
         return this.atDay(1)
     }
 
-    fun YearMonth.month(textStyle: TextStyle = TextStyle.FULL): String {
+    fun YearMonth.monthName(textStyle: TextStyle = TextStyle.FULL): String {
         return this.month.getDisplayName(
             textStyle,
             Locale.getDefault()
@@ -44,7 +44,7 @@ object CalendarUtils {
     }
 
     fun YearMonth.monthYear(textStyle: TextStyle = TextStyle.FULL): String {
-        val month = this.month(textStyle)
+        val month = this.monthName(textStyle)
         return "$month ${this.year}"
     }
 }

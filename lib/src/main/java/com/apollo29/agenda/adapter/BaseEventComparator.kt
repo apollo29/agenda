@@ -5,8 +5,8 @@ import com.apollo29.agenda.model.BaseEvent
 
 class BaseEventComparator : DiffUtil.ItemCallback<BaseEvent>() {
     override fun areItemsTheSame(oldItem: BaseEvent, newItem: BaseEvent) =
-        oldItem == newItem
+        oldItem.equals(newItem)
 
     override fun areContentsTheSame(oldItem: BaseEvent, newItem: BaseEvent) =
-        oldItem.date() == newItem.date()
+        oldItem.equals(newItem)
 }

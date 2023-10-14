@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.apollo29.agenda"
+    namespace = "com.apollo29.agenda.sample"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.apollo29.agenda"
+        applicationId = "com.apollo29.agenda.sample"
         minSdk = 28
         targetSdk = 34
         versionCode = 1

@@ -12,7 +12,7 @@
         <!-- Calendar -->
         <item name="textAppearanceCalendarDay">@style/Base.Theme.Calendar.Day</item>
         <item name="textAppearanceCalendarHeader">@style/Base.Theme.Calendar.Header</item>
-        <item name="textAppearanceCalendarCurrentMonth">@style/Base.Theme.Calendar.Month</item>
+        <item name="textAppearanceCalendarCurrentMonth">@style/Base.Theme.Calendar.TextAppearanceMonth</item>
     </style>
 
     <style name="Theme.Agenda" parent="Base.Theme.Agenda" />
@@ -44,7 +44,8 @@
         <item name="android:textFontWeight">700</item>
     </style>
 
-    <style name="Base.Theme.Calendar.Month" parent="TextAppearance.Material3.BodyLarge">
+    <style name="Base.Theme.Calendar.TextAppearanceMonth" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:textFontWeight">500</item>
     </style>
+
 </resources>

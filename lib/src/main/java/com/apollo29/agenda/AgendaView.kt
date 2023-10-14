@@ -29,7 +29,6 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
 
         itemAnimator = null
         isNestedScrollingEnabled = true
-        setHasFixedSize(true)
     }
 
     var onEventSetListener = eventAdapter?.onEventSetListener
@@ -44,6 +43,7 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     override fun setAdapter(adapter: Adapter<*>?) {
         if (adapter is AgendaAdapter<*, *>) {
+
             eventAdapter = adapter as AgendaAdapter<BaseEvent, List<BaseEvent>>
             super.setAdapter(eventAdapter)
             addItemDecoration(StickyHeaderDecoration(eventAdapter!!.dayHeader, true))

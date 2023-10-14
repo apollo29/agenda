@@ -6,6 +6,9 @@ interface BaseEvent : Comparable<BaseEvent> {
 
     fun date(): LocalDate
 
+    override fun equals(other: Any?): Boolean
+    override fun hashCode(): Int
+
     override fun compareTo(other: BaseEvent): Int {
         val curr: LocalDate = date()
 
@@ -27,9 +30,14 @@ interface BaseEvent : Comparable<BaseEvent> {
         }
 
         override fun equals(other: Any?): Boolean {
-            return if (other is Empty) {
-                compareTo(other) == 0
-            } else super.equals(other)
+            if (this === other) return true
+            if (javaClass != other?.javaClass) return false
+
+            other as Empty
+
+            if (date != other.date) return false
+
+            return true
         }
 
         override fun hashCode(): Int {

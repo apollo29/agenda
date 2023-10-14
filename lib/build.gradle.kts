@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
+    id("maven-publish")
 }
 
 android {
@@ -34,6 +35,20 @@ android {
     buildFeatures {
         dataBinding = true
         buildConfig = true
+    }
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.apollo29"
+            artifactId = "agendaView"
+            version = version
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
     }
 }
 

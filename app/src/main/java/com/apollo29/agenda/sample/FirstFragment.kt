@@ -8,14 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_DRAGGING
+import com.apollo29.agenda.AgendaView
 import com.apollo29.agenda.adapter.OnEventSetListener
 import com.apollo29.agenda.calendar.CalendarViewListener
-import com.apollo29.agenda.databinding.FragmentFirstBinding
 import com.apollo29.agenda.model.BaseEvent
+import com.apollo29.agenda.sample.databinding.FragmentFirstBinding
 import com.apollo29.agenda.util.CalendarUtils.firstDayOfMonth
 import com.apollo29.agenda.util.CalendarUtils.yearMonth
+import com.orhanobut.logger.Logger
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -48,11 +49,14 @@ class FirstFragment : Fragment() {
         // Agenda
         val adapter = TestAdapter()
         binding.agendaView.setAdapter(adapter)
-        binding.agendaView.addOnScrollListener(object : OnScrollListener() {
+        binding.agendaView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                val event = binding.agendaView.firstVisibleEvent()
-                if (event != null && newState != SCROLL_STATE_DRAGGING) {
-                    binding.calendarView.notifyDateChanged(event.date())
+                if (recyclerView is AgendaView) {
+                    val event =
+                        recyclerView.firstVisibleEvent()
+                    if (event != null && newState != SCROLL_STATE_DRAGGING) {
+                        binding.calendarView.notifyDateChanged(event.date())
+                    }
                 }
             }
         })
@@ -91,9 +95,7 @@ class FirstFragment : Fragment() {
                     binding.agendaView.scrollTo(it.firstDayOfMonth())
                     binding.calendarView.notifyMonthChanged(it)
                 }
-
             }
-
         }
 
         // END TEST

@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.apollo29.agenda.R
 import com.apollo29.agenda.adapter.AgendaAdapter
-import com.apollo29.agenda.view.EmptyEventViewHolder
 import com.apollo29.agenda.model.BaseEvent
 import com.orhanobut.logger.Logger
 
-class TestAdapter : AgendaAdapter<BaseEvent, List<BaseEvent>>() {
+class TestAdapter : AgendaAdapter<BaseEvent, List<TestEvent>>() {
     override fun createEventViewHolder(viewGroup: ViewGroup): EventViewHolder<BaseEvent> {
         val view = LayoutInflater.from(viewGroup.context)
             .inflate(R.layout.view_empty_item, viewGroup, false)
-        return EmptyEventViewHolder(view)
+        return TestEventViewHolder(view)
     }
 
     override fun onEventClick(event: BaseEvent) {

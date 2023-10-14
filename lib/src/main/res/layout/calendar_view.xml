@@ -8,42 +8,41 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
 
-        <CheckedTextView
-            android:id="@+id/monthView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:checked="false"
-            android:clickable="true"
-            android:drawableEnd="@drawable/calendar_arrow_drop"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:textAppearance="?attr/textAppearanceCalendarCurrentMonth"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Februar" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/calendarViewContainer"
+        <LinearLayout
+            android:id="@+id/monthViewContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:strokeWidth="0dp"
-            app:cardBackgroundColor="?attr/colorPrimaryContainer"
-            app:layout_constraintTop_toBottomOf="@id/monthView"
-            tools:visibility="visible">
+            android:layout_marginHorizontal="@dimen/calendar_current_month_margin"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.kizitonwose.calendar.view.CalendarView
-                android:id="@+id/calendarView"
-                android:layout_width="match_parent"
+            <CheckedTextView
+                android:id="@+id/monthView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:padding="10dp"
-                app:cv_daySize="seventhWidth"
-                app:cv_dayViewResource="@layout/calendar_day_layout"
-                app:cv_monthHeaderResource="@layout/calendar_day_titles_container" />
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:checked="false"
+                android:clickable="true"
+                android:drawableEnd="@drawable/calendar_arrow_drop"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:textAppearance="?attr/textAppearanceCalendarCurrentMonth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Februar" />
+        </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+        <com.kizitonwose.calendar.view.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:visibility="gone"
+            app:cv_daySize="seventhWidth"
+            app:cv_dayViewResource="@layout/calendar_day_layout"
+            app:cv_monthHeaderResource="@layout/calendar_day_titles_container"
+            app:layout_constraintTop_toBottomOf="@id/monthViewContainer"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

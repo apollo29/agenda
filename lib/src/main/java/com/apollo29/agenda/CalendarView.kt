@@ -12,7 +12,7 @@ import com.apollo29.agenda.calendar.CalendarViewListener
 import com.apollo29.agenda.calendar.DayViewContainer
 import com.apollo29.agenda.calendar.MonthViewContainer
 import com.apollo29.agenda.databinding.CalendarViewBinding
-import com.apollo29.agenda.util.CalendarUtils.monthYear
+import com.apollo29.agenda.util.CalendarUtils.monthName
 import com.apollo29.agenda.util.CalendarUtils.name
 import com.apollo29.agenda.util.CalendarUtils.yearMonth
 import com.kizitonwose.calendar.core.CalendarDay
@@ -34,6 +34,7 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     private var selectedDate: LocalDate? = null
 
     var calendarViewListener: CalendarViewListener? = null
+    var rangeOfMonthToLoad = 12L
 
     constructor(context: Context) : this(context, null, 0)
 
@@ -43,8 +44,7 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
         _binding = CalendarViewBinding.inflate(LayoutInflater.from(context), this, true)
 
         // Month
-        // todo sync today with cal and agenda
-        binding.monthView.text = YearMonth.now().monthYear()
+        binding.monthView.text = YearMonth.now().monthName()
         binding.monthView.setOnClickListener {
             toggleCalendar()
         }
@@ -108,8 +108,8 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
         }
 
         val currentMonth = YearMonth.now()
-        val startMonth = currentMonth.minusMonths(100)  // Adjust as needed
-        val endMonth = currentMonth.plusMonths(100)  // Adjust as needed
+        val startMonth = currentMonth.minusMonths(rangeOfMonthToLoad)  // Adjust as needed
+        val endMonth = currentMonth.plusMonths(rangeOfMonthToLoad)  // Adjust as needed
         val daysOfWeek = daysOfWeek()
 
         binding.calendarView.setup(startMonth, endMonth, daysOfWeek.first())
@@ -139,7 +139,7 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     }
 
     private fun monthView(yearMonth: YearMonth) {
-        binding.monthView.text = yearMonth.monthYear()
+        binding.monthView.text = yearMonth.monthName()
     }
 
     fun scrollToToday() {
@@ -152,7 +152,6 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
             binding.calendarView.notifyDateChanged(it)
         }
         binding.calendarView.scrollToDate(date, position)
-        // todo
         calendarViewListener?.onMonthScroll(date.yearMonth())
     }
 
@@ -169,9 +168,9 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     fun toggleCalendar() {
         binding.monthView.isChecked = !binding.monthView.isChecked
         if (binding.monthView.isChecked) {
-            binding.calendarViewContainer.visibility = VISIBLE
+            binding.calendarView.visibility = VISIBLE
         } else {
-            binding.calendarViewContainer.visibility = GONE
+            binding.calendarView.visibility = GONE
         }
     }
 }
