@@ -11,9 +11,15 @@ import com.apollo29.agenda.R
 import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.DateUtils.isFirstDayOfWeek
 import java.time.format.DateTimeFormatter
+import java.time.temporal.WeekFields
+import java.util.Locale
 
 
-class CalendarWeekItemDecoration : RecyclerView.ItemDecoration() {
+class CalendarWeekItemDecoration(private val type: Type = Type.CALENDAR_WEEK) :
+    RecyclerView.ItemDecoration() {
+
+    private val firstDayOfWeekFormatter = DateTimeFormatter.ofPattern("d")
+    private val lastDayOfWeekFormatter = DateTimeFormatter.ofPattern("d MMM")
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -57,10 +63,19 @@ class CalendarWeekItemDecoration : RecyclerView.ItemDecoration() {
                 if (isFirstDayOfWeek(parent, position)) {
                     val view = inflateHeaderView(parent)
                     val event = adapter.event(position)
-                    val title = parent.context.getString(
+
+                    var title = parent.context.getString(
                         R.string.header_calender_week,
                         event.date().format(CALENDAR_WEEK)
                     )
+                    if (type == Type.WEEK) {
+                        val firstDayOfWeek =
+                            event.date().with(WeekFields.of(Locale.getDefault()).firstDayOfWeek)
+                        val lastDayOfWeek = firstDayOfWeek.plusDays(6)
+                        title = "${firstDayOfWeek.format(firstDayOfWeekFormatter)}–${
+                            lastDayOfWeek.format(lastDayOfWeekFormatter)
+                        }"
+                    }
 
                     fixLayoutSize(view, parent)
                     view.findViewById<TextView>(R.id.header_calendar_week).text = title
@@ -103,6 +118,11 @@ class CalendarWeekItemDecoration : RecyclerView.ItemDecoration() {
         )
         view.measure(childWidth, childHeight)
         view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+    }
+
+    enum class Type {
+        WEEK,
+        CALENDAR_WEEK
     }
 
     companion object {

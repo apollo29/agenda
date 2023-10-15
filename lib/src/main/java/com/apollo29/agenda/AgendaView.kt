@@ -14,6 +14,7 @@ import java.time.LocalDate
 class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
     RecyclerView(context, attrs, defStyle) {
 
+    var calendarWeekType = CalendarWeekItemDecoration.Type.WEEK
     private var onInit = true
     private var eventAdapter: AgendaAdapter<BaseEvent, List<BaseEvent>>? = null
     private val linearLayoutManager: LinearLayoutManager
@@ -31,15 +32,6 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
         isNestedScrollingEnabled = true
     }
 
-    var onEventSetListener = eventAdapter?.onEventSetListener
-
-    fun onInit() {
-        if (onInit && eventAdapter!!.itemCount > 0) {
-            scrollToToday()
-            onInit = false
-        }
-    }
-
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     override fun setAdapter(adapter: Adapter<*>?) {
         if (adapter is AgendaAdapter<*, *>) {
@@ -47,7 +39,7 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
             eventAdapter = adapter as AgendaAdapter<BaseEvent, List<BaseEvent>>
             super.setAdapter(eventAdapter)
             addItemDecoration(StickyHeaderDecoration(eventAdapter!!.dayHeader, true))
-            addItemDecoration(CalendarWeekItemDecoration())
+            addItemDecoration(CalendarWeekItemDecoration(calendarWeekType))
 
             eventAdapter!!.registerAdapterDataObserver(object : AdapterDataObserver() {
                 override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="?attr/textAppearanceAgendaDay"
-    android:layout_width="0dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/textAppearanceCalendarHeader"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:gravity="top|center_horizontal"
-    android:paddingBottom="5dp"/>
+    android:paddingBottom="5dp"
+    tools:text="Mo" />

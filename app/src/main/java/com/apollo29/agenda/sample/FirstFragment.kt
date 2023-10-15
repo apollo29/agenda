@@ -16,7 +16,6 @@ import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.sample.databinding.FragmentFirstBinding
 import com.apollo29.agenda.util.CalendarUtils.firstDayOfMonth
 import com.apollo29.agenda.util.CalendarUtils.yearMonth
-import com.orhanobut.logger.Logger
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -47,7 +46,20 @@ class FirstFragment : Fragment() {
         // TEST
 
         // Agenda
-        val adapter = TestAdapter()
+        val onEventSetListener = object : OnEventSetListener<BaseEvent> {
+            override fun onEventSet(events: List<BaseEvent>) {
+                if (events.isNotEmpty()) {
+                    val yearMonths: MutableSet<YearMonth> = HashSet()
+                    events.forEach {
+                        val yearMonth = it.date().yearMonth()
+                        if (yearMonths.add(yearMonth)) {
+                            binding.calendarView.notifyMonthChanged(yearMonth)
+                        }
+                    }
+                }
+            }
+        }
+        val adapter = TestAdapter(onEventSetListener)
         binding.agendaView.setAdapter(adapter)
         binding.agendaView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -64,20 +76,6 @@ class FirstFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.flow.collectLatest {
                 adapter.submitData(it)
-            }
-        }
-
-        binding.agendaView.onEventSetListener = object : OnEventSetListener<BaseEvent> {
-            override fun onEventSet(events: List<BaseEvent>) {
-                if (events.isNotEmpty()) {
-                    val yearMonths: MutableSet<YearMonth> = HashSet()
-                    events.forEach {
-                        val yearMonth = it.date().yearMonth()
-                        if (yearMonths.add(yearMonth)) {
-                            binding.calendarView.notifyMonthChanged(yearMonth)
-                        }
-                    }
-                }
             }
         }
 

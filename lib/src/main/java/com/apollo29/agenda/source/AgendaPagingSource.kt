@@ -40,10 +40,6 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
         val prevKey = prevKey(initialDate, list.first().date())
         val nextKey = nextKey(initialDate, list.last().date())
 
-
-        Logger.getLogger("TEST")
-            .log(Level.INFO, "DATE $initialDate / start $startDate / end $endDate")
-
         return try {
             LoadResult.Page(
                 data = list,
@@ -137,10 +133,7 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
                 list.addAll(events)
             }
         }
-        val test = correctToLoadSize(initialDate, list, loadSize)
-        Logger.getLogger("TEST")
-            .log(Level.INFO, "correctToLoadSize ${test.size}")
-        return test
+        return correctToLoadSize(initialDate, list, loadSize)
     }
 
     private fun correctToLoadSize(
@@ -148,15 +141,12 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
         list: MutableList<BaseEvent>,
         loadSize: Int
     ): List<BaseEvent> {
-        Logger.getLogger("TEST").log(Level.INFO, "LOAD SIZE $loadSize AND SIZE ${list.size}")
         if (list.size > loadSize) {
             val diff = list.size - loadSize
-            Logger.getLogger("TEST")
-                .log(Level.INFO, "correctToLoadSize $diff / new size ${list.size}")
-            if (initialDate.isBefore(LocalDate.now())) {
-                return list.subList(diff, list.size)
+            return if (initialDate.isBefore(LocalDate.now())) {
+                list.subList(diff, list.size)
             } else {
-                return list.subList(0, loadSize)
+                list.subList(0, loadSize)
             }
         }
         return list

@@ -14,7 +14,7 @@ import java.time.LocalDate
 import java.util.Collections
 import kotlin.math.abs
 
-abstract class AgendaAdapter<E : BaseEvent, T : List<E>> :
+abstract class AgendaAdapter<E : BaseEvent, T : List<E>>(private val onEventSetListener: OnEventSetListener<BaseEvent>) :
     PagingDataAdapter<BaseEvent, AgendaAdapter.EventViewHolder<BaseEvent>>(BaseEventComparator()),
     AgendaItemClickListener<BaseEvent> {
 
@@ -24,7 +24,6 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>> :
         }
     }
 
-    var onEventSetListener: OnEventSetListener<BaseEvent>? = null
     var showMonth = true
     val dayHeader: StickyHeaderAdapter =
         object : StickyHeaderAdapter {
@@ -65,7 +64,7 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>> :
                 i++
             }
         }
-        onEventSetListener?.onEventSet(events)
+        onEventSetListener.onEventSet(events)
     }
 
     fun event(position: Int): BaseEvent {

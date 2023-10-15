@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="calendar_view_top_margin">8dp</dimen>
     <dimen name="calendar_current_month_margin">8dp</dimen>
 </resources>
