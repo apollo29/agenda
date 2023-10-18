@@ -56,6 +56,8 @@ class FirstFragment : Fragment() {
                             binding.calendarView.notifyMonthChanged(yearMonth)
                         }
                     }
+
+                    scrollToToday()
                 }
             }
         }
@@ -97,10 +99,13 @@ class FirstFragment : Fragment() {
         }
 
         // END TEST
-        scrollToToday()
 
         binding.fab.setOnClickListener {
             scrollToToday()
+        }
+
+        binding.refreshList.setOnClickListener {
+            adapter.refresh()
         }
     }
 

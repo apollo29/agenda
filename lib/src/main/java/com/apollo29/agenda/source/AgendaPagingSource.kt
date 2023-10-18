@@ -6,8 +6,6 @@ import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.DateProgression
 import java.io.IOException
 import java.time.LocalDate
-import java.util.logging.Level
-import java.util.logging.Logger
 
 abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
 
@@ -15,13 +13,6 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
     operator fun LocalDate.rangeTo(other: LocalDate) = DateProgression(this, other)
 
     override fun getRefreshKey(state: PagingState<LocalDate, BaseEvent>): LocalDate? {
-        // Try to find the page key of the closest page to anchorPosition from
-        // either the prevKey or the nextKey; you need to handle nullability
-        // here.
-        //  * prevKey == null -> anchorPage is the first page.
-        //  * nextKey == null -> anchorPage is the last page.
-        //  * both prevKey and nextKey are null -> anchorPage is the
-        //    initial page, so return null.
         return state.anchorPosition?.let { anchorPosition ->
             val anchorPage = state.closestPageToPosition(anchorPosition)
             anchorPage?.prevKey ?: anchorPage?.nextKey
@@ -29,8 +20,9 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
     }
 
     override suspend fun load(params: LoadParams<LocalDate>): LoadResult<LocalDate, BaseEvent> {
+        val refresh = params is LoadParams.Refresh
         val loadSize = params.loadSize
-        val initialDate = params.key ?: LocalDate.now()
+        val initialDate = initialDate(params.key, refresh)
         val startDate = startDate(initialDate, loadSize)
         val endDate = endDate(initialDate, loadSize)
 
@@ -48,6 +40,14 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)
+        }
+    }
+
+    private fun initialDate(initialDate: LocalDate?, refresh: Boolean): LocalDate {
+        if (initialDate == null || refresh) {
+            return LocalDate.now()
+        } else {
+            return initialDate
         }
     }
 
@@ -82,6 +82,7 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
     // next/prevKey
 
     private fun nextKey(initialDate: LocalDate, endDate: LocalDate): LocalDate? {
+        // todo maxdate
         return if (endDate.isEqual(initialDate)) {
             null
         } else {
@@ -90,6 +91,7 @@ abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
     }
 
     private fun prevKey(initialDate: LocalDate, startDate: LocalDate): LocalDate? {
+        // todo maxdate
         return if (startDate.isEqual(initialDate)) {
             null
         } else {
