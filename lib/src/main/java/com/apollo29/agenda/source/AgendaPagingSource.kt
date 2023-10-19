@@ -10,6 +10,7 @@ import java.time.LocalDate
 abstract class AgendaPagingSource : PagingSource<LocalDate, BaseEvent>() {
 
     var maxSizeInMonth = 12L
+
     operator fun LocalDate.rangeTo(other: LocalDate) = DateProgression(this, other)
 
     override fun getRefreshKey(state: PagingState<LocalDate, BaseEvent>): LocalDate? {
