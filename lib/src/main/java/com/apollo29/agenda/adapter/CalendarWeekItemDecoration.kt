@@ -65,7 +65,7 @@ class CalendarWeekItemDecoration(private val type: Type = Type.CALENDAR_WEEK) :
                     val event = adapter.event(position)
 
                     var title = parent.context.getString(
-                        R.string.header_calender_week_default,
+                        R.string.header_calender_week,
                         event.date().format(CALENDAR_WEEK)
                     )
                     if (type == Type.WEEK) {
@@ -76,7 +76,7 @@ class CalendarWeekItemDecoration(private val type: Type = Type.CALENDAR_WEEK) :
                         val textFirstDayOfWeek = firstDayOfWeek.format(firstDayOfWeekFormatter)
                         val textLastDayOfWeek = lastDayOfWeek.format(lastDayOfWeekFormatter)
                         title = parent.context.getString(
-                            R.string.header_calender_week,
+                            R.string.header_calender_week_default,
                             textFirstDayOfWeek,
                             textLastDayOfWeek
                         )

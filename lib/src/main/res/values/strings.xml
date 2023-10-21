@@ -45,7 +45,7 @@
     </string>
 
     <string name="no_events">No lunch planned</string>
-    <string name="header_calender_week_default">Calendar week %1$s</string>
-    <string name="header_calender_week">%1$s–%2$s</string>
+    <string name="header_calender_week">Calendar week %1$s</string>
+    <string name="header_calender_week_default">%1$s–%2$s</string>
     <string name="header_calender_week_different_months">%1$s – %2$s</string>
 </resources>
