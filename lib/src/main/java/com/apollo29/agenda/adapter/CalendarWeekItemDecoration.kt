@@ -65,16 +65,29 @@ class CalendarWeekItemDecoration(private val type: Type = Type.CALENDAR_WEEK) :
                     val event = adapter.event(position)
 
                     var title = parent.context.getString(
-                        R.string.header_calender_week,
+                        R.string.header_calender_week_default,
                         event.date().format(CALENDAR_WEEK)
                     )
                     if (type == Type.WEEK) {
                         val firstDayOfWeek =
                             event.date().with(WeekFields.of(Locale.getDefault()).firstDayOfWeek)
                         val lastDayOfWeek = firstDayOfWeek.plusDays(6)
-                        title = "${firstDayOfWeek.format(firstDayOfWeekFormatter)}–${
-                            lastDayOfWeek.format(lastDayOfWeekFormatter)
-                        }"
+
+                        val textFirstDayOfWeek = firstDayOfWeek.format(firstDayOfWeekFormatter)
+                        val textLastDayOfWeek = lastDayOfWeek.format(lastDayOfWeekFormatter)
+                        title = parent.context.getString(
+                            R.string.header_calender_week,
+                            textFirstDayOfWeek,
+                            textLastDayOfWeek
+                        )
+
+                        if (firstDayOfWeek.month != lastDayOfWeek.month) {
+                            title = parent.context.getString(
+                                R.string.header_calender_week_different_months,
+                                firstDayOfWeek.format(lastDayOfWeekFormatter),
+                                textLastDayOfWeek
+                            )
+                        }
                     }
 
                     fixLayoutSize(view, parent)
