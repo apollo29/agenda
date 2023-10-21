@@ -13,6 +13,11 @@
         <item name="textAppearanceCalendarDay">@style/Base.Theme.Calendar.Day</item>
         <item name="textAppearanceCalendarHeader">@style/Base.Theme.Calendar.Header</item>
         <item name="textAppearanceCalendarCurrentMonth">@style/Base.Theme.Calendar.TextAppearanceMonth</item>
+
+        <!-- Colors -->
+        <item name="agendaTextColor">@color/black</item>
+        <item name="agendaTextColorInverse">@color/white</item>
+        <item name="agendaTextColorDisabled">@color/gray</item>
     </style>
 
     <style name="Theme.Agenda" parent="Base.Theme.Agenda" />
@@ -30,7 +35,7 @@
 
     <style name="Base.Theme.Agenda.Weekday" parent="TextAppearance.Material3.BodySmall">
         <item name="android:textFontWeight">500</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">?attr/agendaTextColor</item>
     </style>
 
     <!--

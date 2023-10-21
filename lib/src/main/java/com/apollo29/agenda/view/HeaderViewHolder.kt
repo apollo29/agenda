@@ -1,6 +1,5 @@
 package com.apollo29.agenda.view
 
-import android.graphics.Color
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -11,14 +10,15 @@ import com.apollo29.agenda.model.BaseEvent
 import com.apollo29.agenda.util.DateUtils.DATE_FORMAT
 import com.apollo29.agenda.util.DateUtils.MONTH_FORMAT
 import com.apollo29.agenda.util.DateUtils.isToday
+import com.google.android.material.color.MaterialColors
 
 class HeaderViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     var dateFormat = DATE_FORMAT
     var monthFormat = MONTH_FORMAT
 
-    var dayTextColor: Int = Color.BLACK
-    var currentDayTextColor: Int = Color.BLACK
+    var dayTextColor: Int = MaterialColors.getColor(view, R.attr.agendaTextColor)
+    var currentDayTextColor: Int = MaterialColors.getColor(view, R.attr.agendaTextColor)
     var currentDayBackground: Int = R.drawable.calendar_current_day
 
     fun bind(event: BaseEvent, showMonth: Boolean) {

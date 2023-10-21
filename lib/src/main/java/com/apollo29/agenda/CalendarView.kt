@@ -1,7 +1,6 @@
 package com.apollo29.agenda
 
 import android.content.Context
-import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +14,7 @@ import com.apollo29.agenda.databinding.CalendarViewBinding
 import com.apollo29.agenda.util.CalendarUtils.monthName
 import com.apollo29.agenda.util.CalendarUtils.name
 import com.apollo29.agenda.util.CalendarUtils.yearMonth
+import com.google.android.material.color.MaterialColors
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -60,20 +60,40 @@ class CalendarView(context: Context, attrs: AttributeSet?, defStyle: Int) :
                 container.textView.visibility = View.VISIBLE
                 if (data.date == selectedDate) {
                     // If this is the selected date, show a round background and change the text color.
-                    container.textView.setTextColor(Color.WHITE)
+                    container.textView.setTextColor(
+                        MaterialColors.getColor(
+                            binding.root,
+                            R.attr.agendaTextColorInverse
+                        )
+                    )
                     container.textView.setBackgroundResource(R.drawable.calendar_selected_day)
                 } else if (data.date == LocalDate.now()) {
                     // If this is the current date, show a circle.
-                    container.textView.setTextColor(Color.BLACK)
+                    container.textView.setTextColor(
+                        MaterialColors.getColor(
+                            binding.root,
+                            R.attr.agendaTextColor
+                        )
+                    )
                     container.textView.setBackgroundResource(R.drawable.calendar_current_day)
                 } else {
                     // If this is NOT the selected date, remove the background and reset the text color.
-                    container.textView.setTextColor(Color.BLACK)
+                    container.textView.setTextColor(
+                        MaterialColors.getColor(
+                            binding.root,
+                            R.attr.agendaTextColor
+                        )
+                    )
                     container.textView.background = null
                 }
 
                 if (data.position != DayPosition.MonthDate) {
-                    container.textView.setTextColor(Color.GRAY)
+                    container.textView.setTextColor(
+                        MaterialColors.getColor(
+                            binding.root,
+                            R.attr.agendaTextColorDisabled
+                        )
+                    )
                 }
 
                 container.view.setOnClickListener {

@@ -8,4 +8,9 @@
     <attr name="textAppearanceAgendaDay" format="reference" />
     <attr name="textAppearanceAgendaMonth" format="reference" />
     <attr name="textAppearanceAgendaWeekday" format="reference" />
+
+    <attr name="agendaTextColor" format="color" />
+    <attr name="agendaTextColorInverse" format="color" />
+    <attr name="agendaTextColorDisabled" format="color" />
+
 </resources>

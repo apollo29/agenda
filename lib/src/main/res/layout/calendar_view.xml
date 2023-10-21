@@ -23,6 +23,7 @@
                 android:checked="false"
                 android:clickable="true"
                 android:drawableEnd="@drawable/calendar_arrow_drop"
+                android:drawableTint="?attr/agendaTextColor"
                 android:focusable="true"
                 android:gravity="center_vertical"
                 android:textAppearance="?attr/textAppearanceCalendarCurrentMonth"

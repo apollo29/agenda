@@ -7,5 +7,5 @@
     android:layout_height="24dp"
     android:gravity="center_vertical"
     android:paddingStart="80dp"
-    android:textColor="@color/black"
+    android:textColor="?attr/agendaTextColor"
     tools:text="Kalenderwoche XX" />
