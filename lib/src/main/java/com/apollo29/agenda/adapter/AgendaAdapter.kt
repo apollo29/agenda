@@ -18,6 +18,9 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>>(private val onEventSetL
     PagingDataAdapter<BaseEvent, AgendaAdapter.EventViewHolder<BaseEvent>>(BaseEventComparator()),
     AgendaItemClickListener<BaseEvent> {
 
+    var minDate: LocalDate = LocalDate.now()
+    var maxDate: LocalDate? = null
+
     private val eventLoader: EventCache.Loader = object : EventCache.Loader {
         override fun events(localDate: LocalDate?): List<BaseEvent> {
             return eventsOn(localDate)
@@ -113,7 +116,7 @@ abstract class AgendaAdapter<E : BaseEvent, T : List<E>>(private val onEventSetL
         } else {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.view_empty_item, parent, false)
-            EmptyEventViewHolder(view)
+            EmptyEventViewHolder(view, minDate, maxDate)
         }
     }
 

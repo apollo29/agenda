@@ -32,7 +32,6 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
         isNestedScrollingEnabled = true
     }
 
-    @RestrictTo(RestrictTo.Scope.LIBRARY)
     override fun setAdapter(adapter: Adapter<*>?) {
         if (adapter is AgendaAdapter<*, *>) {
 
@@ -67,7 +66,6 @@ class AgendaView(context: Context, attrs: AttributeSet?, defStyle: Int) :
         throw RuntimeException("Adapter should not be changed")
     }
 
-    @RestrictTo(RestrictTo.Scope.LIBRARY)
     fun firstVisibleEvent(): BaseEvent? {
         val pos = linearLayoutManager.findFirstVisibleItemPosition()
         return if (pos == NO_POSITION) null else eventAdapter?.event(pos)
